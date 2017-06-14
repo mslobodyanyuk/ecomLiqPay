@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Order;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Payment;
+
 
 class CheckoutController extends Controller
 {
@@ -18,6 +19,7 @@ class CheckoutController extends Controller
 //        return redirect('login');
 //    }
 
+
     public function shipping()
     {
         return view('front.shipping-info');
@@ -25,31 +27,37 @@ class CheckoutController extends Controller
 
     public function payment()
     {
-        return view('front.payment');
+        $micro = sprintf("%06d",(microtime(true) - floor(microtime(true))) * 1000000); // Ну раз что-то нужно добавить для полной уникализации то ..
+        $number = date("YmdHis");
+        $order_id = $number.$micro;
+
+
+/*you should point the `public_key` and `private_key`:*/
+        $merchant_id=''; // public_key
+        $signature=""; // private_key
+/*you should point the `public_key` and `private_key`:*/
+
+        $price = Cart::subtotal();
+
+        $liqpay = new \LiqPay($merchant_id, $signature);
+        $html = $liqpay->cnb_form(array(
+            'version' => '3',
+            'amount' => "$price",
+            'currency' => 'UAH',     //can change  'EUR','UAH','USD','RUB','RUR'
+            'description' => "test buying t-shirt from webstore using LiqPay payment system",  //Or change to $ desc "Purpose of payment, specify your"
+            'sandbox' => '1',
+/*you should point your site*/
+            'result_url' => 'http://your-site/store-payment',
+        ));
+
+        return view('front.payment', compact('html'));
+
     }
 
-    public function storePayment(Request $request)
+ public static function storePayment(Request $request)
     {
-        // Set your secret key: remember to change this to your live secret key in production
-    // See your keys here: https://dashboard.stripe.com/account/apikeys
-        \Stripe\Stripe::setApiKey("sk_test_M8hfDnQwXx36Lm8qJ2zWjVDP");
-
-// Get the credit card details submitted by the form
-        $token = $request->stripeToken;
-
-// Create a charge: this will charge the user's card
-        try {
-            $charge = \Stripe\Charge::create(array(
-                "amount" => Cart::total()*100, // Amount in cents
-                "currency" => "usd",
-                "source" => $token,
-                "description" => "Example charge"
-            ));
-        } catch (\Stripe\Error\Card $e) {
-            // The card has been declined
-        }
-      //Create the order
-       Order::createOrder();
+        //Create the order
+        Order::createOrder();
 
         //redirect user to some page
         return "Order completed";

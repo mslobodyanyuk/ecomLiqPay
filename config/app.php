@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Kiev',
 
     /*
     |--------------------------------------------------------------------------
@@ -231,6 +231,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
 
+        //LiqPay
+        'LiqPay' => \App\Payment\LiqPay::class,
     ],
 
 ];

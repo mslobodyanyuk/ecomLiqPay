@@ -44,7 +44,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::get('payment','CheckoutController@payment')->name('checkout.payment');
-Route::post('store-payment','CheckoutController@storePayment')->name('payment.store');
+//Route::post('store-payment','CheckoutController@storePayment')->name('payment.store');
+Route::get('store-payment','CheckoutController@storePayment')->name('payment.store');
+
 
 
 Route::get('test',function(){

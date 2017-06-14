@@ -78,7 +78,7 @@
 <script src="{{asset('dist/js/vendor/jquery.js')}}"></script>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
-    Stripe.setPublishableKey('pk_test_GryUHqXe48kgNc75J2BovmeN');
+    Stripe.setPublishableKey('pk_test_bUtJ2AiNL0jZSL10UPdcIXOT');//inserted my publishable key
 </script>
 <script src="{{asset('dist/js/app.js')}}"></script>
 </body>
