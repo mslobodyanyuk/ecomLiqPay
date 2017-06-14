@@ -53,7 +53,8 @@ LiqPay documentation:
  <https://www.liqpay.com/ru/doc/pay>
 
 Useful links with code to using LiqPay payment system:
-  Test and try to introduce the code into the site (webstore):
+
+    Test and try to introduce the code into the site (webstore):
 <http://beznervov.com/kak-prikrutit-oplatu-liqpay-k-svoemu-sajtu-php/>
 	
 <http://polyakov.co.ua/page/pishem-modul-oplatyi-tovara-s-pomoschyu-liqpay-v-modalnom-okne>
