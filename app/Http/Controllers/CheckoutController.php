@@ -27,7 +27,7 @@ class CheckoutController extends Controller
 
     public function payment()
     {
-        $micro = sprintf("%06d",(microtime(true) - floor(microtime(true))) * 1000000); // Ну раз что-то нужно добавить для полной уникализации то ..
+        $micro = sprintf("%06d",(microtime(true) - floor(microtime(true))) * 1000000); // Well, if something needs to be added for complete uniqueness then ..
         $number = date("YmdHis");
         $order_id = $number.$micro;
 
